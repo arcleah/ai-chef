@@ -26,16 +26,9 @@ def test():
         cursor.close()
         curr.close()
 
-        return "hello" + name + ""
+        return "hello" + name + "!"
     return render_template("profile.html")
-
-@app.route("/aboutus")
-def aboutus():
-    return render_template("aboutus.html")
-
-@app.route("/home")
-def home():
-    return render_template("home.html")
 
 if __name__ == "__main__":
     app.run()
+

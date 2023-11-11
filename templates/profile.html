@@ -1,0 +1,54 @@
+<!-- FILEPATH: /C:/Users/yo-s-/Documents/GitHub/ai-chef/pages/profile.html -->
+
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>User Profile</title>
+  </head>
+  <body>
+    <h1>User Profile</h1>
+    <form action ="{{url_for("test")}}" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name"><br><br>
+      <label for="dietary-restrictions">Dietary Restrictions:</label>
+      <input type="text" id="dietary-restrictions" name="dietary-restrictions"><br><br>
+      <label for="allergies">Allergies:</label>
+      <input type="text" id="allergies" name="allergies"><br><br>
+      <label for="food-preferences">Food Preferences:</label>
+      <input type="text" id="food-preferences" name="food-preferences"><br><br>
+      <input type="submit" value="Save">
+    </form>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Profile</title>
+  </head>
+  <body>
+    <h1>User Registration</h1>
+    <form action="{{ url_for('register') }}" method="post">
+    
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><br><br>
+      <label for="dietary-restrictions">Dietary Restrictions:</label>
+      <input type="text" id="dietary-restrictions" name="dietary_restrictions"><br><br>
+      <label for="allergies">Allergies:</label>
+      <input type="text" id="allergies" name="allergies"><br><br>
+      <label for="food-preferences">Food Preferences:</label>
+      <input type="text" id="food-preferences" name="food_preferences"><br><br>
+
+      <h2>Account Information</h2>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required><br><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br><br>
+
+      <input type="submit" value="Register">
+    </form>
+  </body>
+</html>
+
+
+
