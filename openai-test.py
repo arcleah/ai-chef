@@ -1,7 +1,7 @@
-// to install openai, run the terminal
-// enter: pip install --upgrade openai
-// to run the program, enter: python openai-test.py
-// to exit the program, press ctrl + c
+# to install openai, run the terminal
+# enter: pip install --upgrade openai
+# to run the program, enter: python openai-test.py
+# to exit the program, press ctrl + c
 
 import os
 from openai import OpenAI
