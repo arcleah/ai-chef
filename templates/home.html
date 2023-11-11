@@ -1,16 +1,57 @@
-
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Home Page</title>
-  </head>
-  <body>
-    <h1>Welcome to the Home Page!</h1>
-    <form action="{{ url_for('aboutus') }}">
-      <button type="submit">About Us</button>
-    </form>
-    <form action="{{ url_for('profile') }}">
-      <button type="submit">Profile</button>
-    </form>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef AI</title>
+    <style>
+        body {
+            font-family: 'Chewy', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eaf0e9bd;
+        }
+        header {
+            background-color: #97c294;
+            color: black;
+            padding: 1em;
+            text-align: center;
+        }
+        main {
+            text-align: center;
+            padding-top: 50px; /* Adjust the padding as needed */
+        }
+        #logo {
+            width: 200px; /* Adjust the size as needed */
+            height: auto;
+            margin-bottom: 20px; /* Space between logo and welcome message */
+        }
+        .welcome-message {
+            font-size: 2em; /* Adjust the font size as needed */
+            margin-bottom: 20px; /* Space between welcome message and buttons */
+        }
+        .login-button, .signup-button {
+            font-size: 1.5em; /* Adjust the font size as needed */
+            padding: 10px 20px; /* Adjust the padding as needed */
+            margin: 10px; /* Space between buttons */
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Placeholder for navigation links -->
+    </header>
+
+    <main>
+        <img id="logo" src="{{ url_for('static', filename='images/AI Chef Logo (4).png') }}" alt="Chef AI Logo">
+        <div class="welcome-message">WELCOME</div>
+        <button class="login-button" onclick="location.href='login.html'">Login</button>
+        <button class="signup-button" onclick="location.href='signup.html'">Sign Up</button>
+    </main>
+
+    <footer>
+        <!-- Placeholder for footer content -->
+    </footer>
+</body>
 </html>
