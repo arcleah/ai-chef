@@ -13,3 +13,7 @@ What's next?
 Better integration of the uniqueness of every individual allows users to be more specific about their dietary restrictions and allergies. We would love to in the future attempt to bring our website to mobile devices that allows kitchen management on the go.
 
 *Note that this project was done for Code to Change YYC 2023 and is subject to more improvement in the future!
+
+Feel Free to Have a look here for more information on this Project!
+
+https://devpost.com/software/chef-ai-hf06g1
