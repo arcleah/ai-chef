@@ -55,7 +55,13 @@
     <header>
         <nav>
             <ul>
-                <li><a href="{{ url_for('aboutus') }}">About Us</a></li>
+                <li>
+                <div>
+                    <a href="{{ url_for('aboutus') }}">
+                        <img style="margin-left: 10px; margin-bottom: 6px" class="button-img" src="{{ url_for('static', filename='images/about_me.png') }}" alt="About Us">
+                    </a>
+                </div>
+            </li>
             </ul>
         </nav>
     </header>
@@ -63,7 +69,6 @@
     <main>
         <img id="welcome-image" src="{{ url_for('static', filename='images/welcome.png') }}" alt="Welcome">
         <img class="mainpagelogo" src="{{ url_for('static', filename='images/mainpagelogo.png') }}" alt="Chef AI homepage Logo">
-        <img class="button-img" src="{{ url_for('static', filename='images/about_us.png') }}" alt="About Us">
         <a href="{{ url_for('login') }}">
             <img class="button-img" src="{{ url_for('static', filename='images/login.png') }}" alt="Login">
         </a>
