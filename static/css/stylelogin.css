@@ -4,16 +4,23 @@ body {
     margin: 0;
     padding: 0;
     background-color: #eaf0e9bd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
 }
+
 
 header {
     background-color: #97c294;
     color: black;
     padding: 3em;
     text-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 0;
 }
 
 main {
@@ -23,27 +30,51 @@ main {
 
 #logo {
     position: absolute;
-    left: 20px;
+    left: 60px;
     top: -38px;
     width: 179px;
     height: 175px;
 }
 
-.ourGoal {
-    color: #000;
-    font-size: 40px;
-    font-family: Chewy, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-        'Liberation Sans', sans-serif;
-    position: absolute;
-    left: 464px;
-    top: 246px;
-    width: 453px;
-    height: 109px;
-    text-align: center;
-    align-items: center;
-    flex-direction: column;
+#loginlogo {
+    object-fit: contain;
+    left: 290px;
+    top: 0px;
+    width: 475px;
+    height: 450px;
 }
 
-h1 {
-    margin-left: 100px; /* Move the h1 element to the right */
+.login-container {
+    object-fit: contain;
+    width: 300px;
+    padding: 50px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #97c294 ;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group input {
+    width: 91%;
+    padding: 4%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
+.form-group button:hover {
+    background-color: green;
 }
