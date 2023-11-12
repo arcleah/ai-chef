@@ -53,9 +53,9 @@ def login():
             # Correct credentials, redirect to pantry page
             return redirect(url_for('pantry'))
         else:
-            # Incorrect credentials, you may want to display an error message
+            # Incorrect credentials
             flash('Invalid username or password', 'error')
-            return render_template("login.html")
+            return render_template("login.html",)
 
     return render_template("login.html")
 
