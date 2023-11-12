@@ -3,52 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website Title</title>
     <style>
         /* Optional: Add your CSS styles here */
         body {
-            font-family: Arial, sans-serif;
+            font-family: Chewy, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+            'Liberation Sans', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
+            background-color: #eaf0e9bd;
         }
 
         header {
-            background-color: #333;
-            color: white;
-            padding: 1em;
+            background-color: #97c294;
+            color: black;
+            padding: 3em;
             text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+        
 
         main {
             padding: 2em;
+            flex: 1; /* Grow to fill the available space */
+
         }
 
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1em;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+        #logo {
+            position: absolute;
+            left: 20px;
+            top: -38px;
+            width: 179px;
+            height: 175px;
         }
+
+        .ourGoal {
+            color: #000;
+            font-size: 40px;
+            font-family: Chewy, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+                'Liberation Sans', sans-serif;
+            position: absolute;
+            left: 464px;
+            top: 246px;
+            width: 453px;
+            height: 109px;
+            text-align: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1 {
+            margin-left: 100px; /* Move the h1 element to the right */
+        }
+
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Your Website Header</h1>
-    </header>
-
+    <a href="mainpage.html">
+        <header>
+            <a href="mainpage.html">
+            <img id ="logo" src="{{ url_for('static', filename='images/AI Chef Logo (4).png') }}" alt="Chef AI homepage Logo">
+            </a>
+        </header>
+    </a>
     <main>
-        <h2>Welcome to My Website!</h2>
-        <p>This is a basic HTML website.</p>
+        <h2>Our Goal </h2>
+        </div class ="ourGoal">
+            <p>This is our goal</p>
     </main>
-
-    <footer>
-        <p>&copy; 2023 Your Website Name</p>
-    </footer>
-
 </body>
 </html>
