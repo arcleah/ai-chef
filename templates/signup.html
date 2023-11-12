@@ -10,7 +10,7 @@
     <img id ="logo" src="{{ url_for('static', filename='images/logo 1.png') }}" alt="Chef AI homepage Logo">
     <div class="signup-container">
         <h1>Sign Up</h1>
-        <form action="/submit-your-signup-form" method="post">
+        <form id="signup-form" action="/" method="post">
             <div class="form-group">
                 <label for="name">Full Name:</label>
                 <input type="text" id="name" name="name" required>
@@ -28,9 +28,42 @@
                 <input type="password" id="confirm-password" name="confirm-password" required>
             </div>
             <div class="form-group">
-                <button type="submit">Sign Up</button>
+                <button type="submit" onclick="validateAndSubmit(event)">Sign Up</button>
             </div>
         </form>
+        <span id="error-message" style="color: red; visibility: hidden">Password does not match</span>
     </div>
+    <script>
+        function validateAndSubmit(event) {
+            var password = document.getElementById('password');
+            var confirmPassword = document.getElementById('confirm-password');
+            var errorMessage = document.getElementById('error-message');
+            var name = document.getElementById('name');
+            var email = document.getElementById('email');
+
+            if(password.value !== confirmPassword.value) {
+                errorMessage.style.visibility = 'visible';
+                errorMessage.textContent = 'Password does not match';
+                event.preventDefault(); // Prevent form submission
+            } else {
+                errorMessage.style.visibility = 'visible';
+                errorMessage.textContent = 'Creating account...';
+                password.disabled = true;
+                confirmPassword.disabled = true;
+                name.disabled = true;
+                email.disabled = true;
+
+                name.style.backgroundColor = '#ddd';
+                email.style.backgroundColor = '#ddd';
+                password.style.backgroundColor = '#ddd'; // Grey out
+                confirmPassword.style.backgroundColor = '#ddd'; // Grey out
+                event.preventDefault();
+
+                setTimeout(function() {
+                    document.getElementById('signup-form').submit();
+                }, 3000); // Delay of 3000 milliseconds (3 seconds)
+        }
+    }
+    </script>
 </body>
 </html>

@@ -66,11 +66,11 @@
 
             for (var i = 0; i < paragraphs.length; i++) {
                 var itemText = paragraphs[i].innerText;
-                var itemParts = itemText.split(' '); // Assuming the format is 'Produce: [produce] Quantity: [quantity] Expiry Date: [expiryDate]'
+                var itemParts = itemText.split(' '); // Split the text by spaces
                 var produce = itemParts[1];
                 var quantity = itemParts[3];
-                var expiryDate = itemParts[6] + ' ' + itemParts[7]; // Assuming expiry date is two words like '2 days'
-                itemsList.push({ produce, quantity, expiryDate });
+                var expiryDate = itemParts[6] + ' ' + itemParts[7]; // Combine the date and month
+                itemsList.push({ produce, quantity, expiryDate }); // Add the item to the list
             }
 
             return itemsList;
