@@ -9,10 +9,12 @@ from openai import OpenAI
 OpenAI.api_key = ('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')
 client = OpenAI(api_key="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")
 
+user_input = "Produce: Coffee Quantity: 1 Expiry Date: 3 days Produce:Rice  Quantity: 2 Expiry Date: 3 days"
+
 completion = client.chat.completions.create(
   model="gpt-3.5-turbo",
   messages=[
-    {"role": "system", "content": "You are a professional chef, skilled in creating recipes. I have limited ingredients and I want to make a delicious meal, I only have eggs, carrots, striploin, and mushrooms. Can you give me options on various recipes I can make with these ingredients?"},
+    {"role": "system", "content": "i have these expiring ingredients, please try to utilize all of them in a recipe and minimize the use of other ingredients as much as you can" + user_input},
   ]
 )
 
