@@ -29,11 +29,21 @@
         <div id="itemsDisplay">
             <!-- Added items will be displayed here -->
         </div>
-        <button type="button" >Generate Recipe</button>
+        <button type="button" onclick="sendDataToServer()">Generate Recipe</button>
     </div>
+
+    <form id="hiddenForm" action="/submit-data" method="post" style="display: none;">
+        <input type="hidden" name="itemsData" id="itemsData">
+    </form>
 
     <script>
         var itemsDictionary = {};
+
+        function sendDataToServer() {
+            var itemsData = collectItems();
+            document.getElementById('itemsData').value = itemsDictionary;
+            document.getElementById('hiddenForm').submit();
+}
 
         function addInputFields() {
             var form = document.getElementById('itemForm');
