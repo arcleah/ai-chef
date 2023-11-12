@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Chef AI </title>
+    <style>
+        /* Optional: Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eaf0e9;
+        }
+
+        header {
+            background-color: #64a460;
+            color: black;
+            padding: 1em;
+            text-align: center;
+        }
+
+        main {
+            padding: 2em;
+        }
+        #mainpagelogo{
+            position: absolute;
+            left: 330px;
+            top: 106px;
+            width: 779px;
+            height: 770px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+    </header>
+
+    <main>
+        <img id ="mainpagelogo" src="{{ url_for('static', filename='images/chef ai.png') }}" alt="Chef AI homepage Logo">
+    </main>
+</body>
+</html>
