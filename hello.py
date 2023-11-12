@@ -66,5 +66,9 @@ def login():
 def signup():
     return render_template("signup.html")
 
+@app.route("/pantry")
+def pantry():
+    return render_template("pantry.html")
+
 if __name__ == "__main__":
     app.run()
