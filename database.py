@@ -1,7 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 
-def create_connection(db_file):
+def create_connection(db_file): # Connect to database
     """ Create a database connection to a SQLite database """
     conn = None
     try:
@@ -11,7 +11,7 @@ def create_connection(db_file):
         print(e)
     return conn
 
-def create_table(conn, create_table_sql):
+def create_table(conn, create_table_sql): # Create a table
     """ Create a table from the create_table_sql statement """
     try:
         c = conn.cursor()
@@ -20,7 +20,7 @@ def create_table(conn, create_table_sql):
     except Error as e:
         print(e)
 
-def create_user(conn, user):
+def create_user(conn, user): # Create a user table
     """
     Create a new user in the users table
     :param conn:
@@ -34,7 +34,7 @@ def create_user(conn, user):
 
     return cur.lastrowid
     
-def create_pantry(conn, pantry):
+def create_pantry(conn, pantry): # Create an pantry table
     """
     Create a new pantry in the pantry table
     :param conn:
@@ -42,8 +42,6 @@ def create_pantry(conn, pantry):
     """
     sql = ''' INSERT INTO pantry(userId, food, expiry_date, amount)
              VALUES(?,?,?,?) '''
-    #sql = ''' INSERT INTO pantry(userId, food, expiry_date, amount)
-     #       VALUES(?,?,CAST(? AS DATETIME),?) '''
     cur = conn.cursor()
     cur.execute(sql, pantry)
     conn.commit()
