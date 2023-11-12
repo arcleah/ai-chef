@@ -18,9 +18,7 @@
 
     
     <div id="container">
-        <h1>
-            Pantry
-        </h1>
+
         <button type="button" onclick="addInputFields()">Add New Item</button>
         <form id="itemForm" onsubmit="handleSubmit(event)">
             <!-- Input fields will be added here -->
@@ -33,8 +31,8 @@
         </div>
         <button type="button" onclick="sendDataToServer()">Generate Recipe</button>
         <div id="recipeDisplay">
-            <!-- The recipe returned from OpenAI will be displayed here -->
-        </div>        
+            <!-- Recipe will be displayed here -->
+        </div>
     </div>
 
     <form id="hiddenForm" action="/submit-data" method="post" style="display: none;">
@@ -44,34 +42,39 @@
     <script>
         var itemsDictionary = {};
 
+        function sendDataToServer() {
+            var itemsData = collectItems();
+            fetch('/generate-recipe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ itemsData: itemsData })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('recipeDisplay').innerHTML = data.recipe;
+            })
+            .catch(error => console.error('Error:', error));
+        }   
+
+
         function collectItems() {
             var displayArea = document.getElementById('itemsDisplay');
             var paragraphs = displayArea.getElementsByTagName('p');
             var itemsList = [];
 
             for (var i = 0; i < paragraphs.length; i++) {
-                itemsList.push(paragraphs[i].innerText);
+                var itemText = paragraphs[i].innerText;
+                var itemParts = itemText.split(' '); // Assuming the format is 'Produce: [produce] Quantity: [quantity] Expiry Date: [expiryDate]'
+                var produce = itemParts[1];
+                var quantity = itemParts[3];
+                var expiryDate = itemParts[6] + ' ' + itemParts[7]; // Assuming expiry date is two words like '2 days'
+                itemsList.push({ produce, quantity, expiryDate });
             }
 
-            return itemsList.join('; ');
+            return itemsList;
         }
-
-        function sendDataToServer() {
-        var itemsData = collectItems();
-        fetch('/submit-data', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ itemsData: itemsData })
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('recipeDisplay').innerHTML = data.recipe;
-        })
-        .catch(error => console.error('Error:', error));
-        }
-
 
         function addInputFields() {
             var form = document.getElementById('itemForm');
@@ -115,22 +118,9 @@
             var quantity = formData.get('quantity');
             var expiryDate = formData.get('expiryDate');
 
-            // Validate inputs
-            if (!produce.trim() || !quantity.trim() || !expiryDate) {
-                alert('Please fill in all fields.');
-                return; // Exit the function if any field is empty
-            }
-            
-            var today = new Date();
-            today.setHours(0, 0, 0, 0); // Reset time to start of the day for accurate comparison
-            var expiry = new Date(expiryDate);
-
-            if (expiry < today) {
-                alert('The expiry date is in the past. Please enter a valid expiry date.');
-                return; // Exit the function and do not add the item
-            }
-
             // Display the item
+            var displayArea = document.getElementById('itemsDisplay');
+            displayArea.innerHTML += '<p> Produce: ' + produce + ' Quantity: ' + quantity + ' Expiry Date: ' + expiryDate + '</p>';
             var itemID = new Date().getTime();
             itemsDictionary[itemID] = {
                 produce: produce,
@@ -141,8 +131,8 @@
             // Clear the form for new input
             event.target.reset();
         }
+
         function displayItems() {
-            removeExpiredItems();
             var displayArea = document.getElementById('itemsDisplay');
             displayArea.innerHTML = ''; // Clear previous items
             for (var id in itemsDictionary) {
@@ -157,29 +147,17 @@
                 } else {
                     bgColor = '#FFFAFAFA'; // Default color for more than 5 days
                 }
+
                 displayArea.innerHTML += '<p style="background-color:' + bgColor + '; padding: 10px; border-radius: 4px;">'+'Produce: ' + item.produce + ' Quantity: ' + item.quantity + ' Expiry Date: ' + item.expiryDate + ' (' + daysLeft + ' days left)</p>';
             }
         }
+
         function daysUntilExpiry(expiryDate) {
             var today = new Date();
             var expiry = new Date(expiryDate);
             var timeDiff = expiry.getTime() - today.getTime();
             var daysDiff = timeDiff / (1000 * 3600 * 24);
             return Math.ceil(daysDiff); // Returns the number of days left
-        }
-        function removeExpiredItems() {
-            var today = new Date();
-            for (var id in itemsDictionary) {
-                var item = itemsDictionary[id];
-                var expiryDate = new Date(item.expiryDate);
-                if (expiryDate < today) {
-                    delete itemsDictionary[id]; // Removes the expired item
-                }
-            }
-        }
-        function removeItem(itemId) {
-            delete itemsDictionary[itemId]; // Removes the selected item
-            displayItems(); // Update the display
         }
     </script>
 
