@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylepantry.css') }}">
+    <title>Produce Tracker</title>
+  
+</head>
+<body>
+    <a href="mainpage.html">
+        <header>
+            <a href="mainpage.html">
+            <img id ="logo" src="{{ url_for('static', filename='images/Logo 1.png') }}" alt="Chef AI homepage Logo">
+            </a>
+        </header>
+    </a>
+
+    
+    <div id="container">
+        <h1>
+            Pantry
+        </h1>
+        <button type="button" onclick="addInputFields()">Add New Item</button>
+        <form id="itemForm" onsubmit="handleSubmit(event)">
+            <!-- Input fields will be added here -->
+        </form>
+        <h1>
+            Current Items
+        </h1>
+        <div id="itemsDisplay">
+            <!-- Added items will be displayed here -->
+        </div>
+        <button type="button" >Generate Recipe</button>
+    </div>
+
+    <script>
+        function addInputFields() {
+            var form = document.getElementById('itemForm');
+            form.innerHTML += '<input type="text" placeholder="Produce/Ingredient" name="produce">';
+            form.innerHTML += '<input type="text" placeholder="Quantity" name="quantity">';
+            form.innerHTML += '<input type="text" placeholder="Expiry Date" name="expiryDate">';
+            form.innerHTML += '<button type="submit">Add Item</button><br>';
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevents form from submitting traditionally
+
+            var formData = new FormData(event.target);
+            var produce = formData.get('produce');
+            var quantity = formData.get('quantity');
+            var expiryDate = formData.get('expiryDate');
+
+            // Display the item
+            var displayArea = document.getElementById('itemsDisplay');
+            displayArea.innerHTML += '<p> Produce: ' + produce + ' Quantity: ' + quantity + ' Expiry Date: ' + expiryDate + '</p>';
+
+            // Clear the form for new input
+            event.target.reset();
+        }
+    </script>
+
+
+</body>
+</html>
