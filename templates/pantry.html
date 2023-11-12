@@ -18,7 +18,9 @@
 
     
     <div id="container">
-
+        <h1>
+            Pantry
+        </h1>
         <button type="button" onclick="addInputFields()">Add New Item</button>
         <form id="itemForm" onsubmit="handleSubmit(event)">
             <!-- Input fields will be added here -->
@@ -77,9 +79,22 @@
             var quantity = formData.get('quantity');
             var expiryDate = formData.get('expiryDate');
 
+            // Validate inputs
+            if (!produce.trim() || !quantity.trim() || !expiryDate) {
+                alert('Please fill in all fields.');
+                return; // Exit the function if any field is empty
+            }
+            
+            var today = new Date();
+            today.setHours(0, 0, 0, 0); // Reset time to start of the day for accurate comparison
+            var expiry = new Date(expiryDate);
+
+            if (expiry < today) {
+                alert('The expiry date is in the past. Please enter a valid expiry date.');
+                return; // Exit the function and do not add the item
+            }
+
             // Display the item
-            var displayArea = document.getElementById('itemsDisplay');
-            displayArea.innerHTML += '<p> Produce: ' + produce + ' Quantity: ' + quantity + ' Expiry Date: ' + expiryDate + '</p>';
             var itemID = new Date().getTime();
             itemsDictionary[itemID] = {
                 produce: produce,
@@ -91,6 +106,7 @@
             event.target.reset();
         }
         function displayItems() {
+            removeExpiredItems();
             var displayArea = document.getElementById('itemsDisplay');
             displayArea.innerHTML = ''; // Clear previous items
             for (var id in itemsDictionary) {
@@ -105,7 +121,6 @@
                 } else {
                     bgColor = '#FFFAFAFA'; // Default color for more than 5 days
                 }
-
                 displayArea.innerHTML += '<p style="background-color:' + bgColor + '; padding: 10px; border-radius: 4px;">'+'Produce: ' + item.produce + ' Quantity: ' + item.quantity + ' Expiry Date: ' + item.expiryDate + ' (' + daysLeft + ' days left)</p>';
             }
         }
@@ -115,6 +130,20 @@
             var timeDiff = expiry.getTime() - today.getTime();
             var daysDiff = timeDiff / (1000 * 3600 * 24);
             return Math.ceil(daysDiff); // Returns the number of days left
+        }
+        function removeExpiredItems() {
+            var today = new Date();
+            for (var id in itemsDictionary) {
+                var item = itemsDictionary[id];
+                var expiryDate = new Date(item.expiryDate);
+                if (expiryDate < today) {
+                    delete itemsDictionary[id]; // Removes the expired item
+                }
+            }
+        }
+        function removeItem(itemId) {
+            delete itemsDictionary[itemId]; // Removes the selected item
+            displayItems(); // Update the display
         }
     </script>
 
