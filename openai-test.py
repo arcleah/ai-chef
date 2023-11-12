@@ -12,8 +12,7 @@ client = OpenAI(api_key="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")
 completion = client.chat.completions.create(
   model="gpt-3.5-turbo",
   messages=[
-    {"role": "system", "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."},
-    {"role": "user", "content": "Compose a poem that explains the concept of recursion in programming."}
+    {"role": "system", "content": "You are a professional chef, skilled in creating recipes. I have limited ingredients and I want to make a delicious meal, I only have eggs, carrots, striploin, and mushrooms. Can you give me options on various recipes I can make with these ingredients?"},
   ]
 )
 
