@@ -39,11 +39,23 @@
     <script>
         var itemsDictionary = {};
 
+        function collectItems() {
+            var displayArea = document.getElementById('itemsDisplay');
+            var paragraphs = displayArea.getElementsByTagName('p');
+            var itemsList = [];
+
+            for (var i = 0; i < paragraphs.length; i++) {
+                itemsList.push(paragraphs[i].innerText);
+            }
+
+            return itemsList.join('; ');
+        }
+
         function sendDataToServer() {
-            var itemsData = collectItems();
-            document.getElementById('itemsData').value = itemsDictionary;
-            document.getElementById('hiddenForm').submit();
-}
+        var itemsData = collectItems();
+        document.getElementById('itemsData').value = itemsData;
+        document.getElementById('hiddenForm').submit();
+        }
 
         function addInputFields() {
             var form = document.getElementById('itemForm');
