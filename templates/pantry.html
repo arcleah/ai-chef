@@ -30,6 +30,9 @@
             <!-- Added items will be displayed here -->
         </div>
         <button type="button" onclick="sendDataToServer()">Generate Recipe</button>
+        <div id="recipeDisplay">
+            <!-- The recipe returned from OpenAI will be displayed here -->
+        </div>        
     </div>
 
     <form id="hiddenForm" action="/submit-data" method="post" style="display: none;">
@@ -53,9 +56,20 @@
 
         function sendDataToServer() {
         var itemsData = collectItems();
-        document.getElementById('itemsData').value = itemsData;
-        document.getElementById('hiddenForm').submit();
+        fetch('/submit-data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ itemsData: itemsData })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('recipeDisplay').innerHTML = data.recipe;
+        })
+        .catch(error => console.error('Error:', error));
         }
+
 
         function addInputFields() {
             var form = document.getElementById('itemForm');
