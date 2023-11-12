@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = 'corn'  # for session management
 correct_email = 'johndoe123@gmail.com'
 correct_password = '1234'
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="api key")
 
 database = r"C:\Users\yo-s-\Documents\GitHub\ai-chef\sqlite\database.db"  # Define the database path here
 
