@@ -10,7 +10,8 @@ from openai import OpenAI
 OpenAI.api_key = ('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')
 client = OpenAI(api_key="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")
 
-@app.route('/submit-data', methods=['POST'])
+
+
 def submit_data():
     items_data = request.json['itemsData']
 
@@ -30,6 +31,3 @@ def submit_data():
 
     recipe = response.choices[0].text.strip()
     return jsonify({'recipe': recipe})
-
-if __name__ == '__main__':
-    app.run(debug=True)
