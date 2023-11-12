@@ -18,9 +18,7 @@
 
     
     <div id="container">
-        <h1>
-            Pantry
-        </h1>
+
         <button type="button" onclick="addInputFields()">Add New Item</button>
         <form id="itemForm" onsubmit="handleSubmit(event)">
             <!-- Input fields will be added here -->
@@ -35,13 +33,41 @@
     </div>
 
     <script>
+        var itemsDictionary = {};
+
         function addInputFields() {
             var form = document.getElementById('itemForm');
-            form.innerHTML += '<input type="text" placeholder="Produce/Ingredient" name="produce">';
-            form.innerHTML += '<input type="text" placeholder="Quantity" name="quantity">';
-            form.innerHTML += '<input type="text" placeholder="Expiry Date" name="expiryDate">';
-            form.innerHTML += '<button type="submit">Add Item</button><br>';
+
+            // Create input for produce/ingredient
+            var produceInput = document.createElement('input');
+            produceInput.type = 'text';
+            produceInput.placeholder = 'Produce/Ingredient';
+            produceInput.name = 'produce';
+            form.appendChild(produceInput);
+
+            // Create input for quantity
+            var quantityInput = document.createElement('input');
+            quantityInput.type = 'text';
+            quantityInput.placeholder = 'Quantity';
+            quantityInput.name = 'quantity';
+            form.appendChild(quantityInput);
+
+            // Create input for expiry date
+            var expiryInput = document.createElement('input');
+            expiryInput.type = 'date';
+            expiryInput.name = 'expiryDate';
+            form.appendChild(expiryInput);
+
+            // Create a submit button
+            var submitButton = document.createElement('button');
+            submitButton.type = 'submit';
+            submitButton.textContent = 'Add Item';
+            form.appendChild(submitButton);
+
+            // Add a line break
+            form.appendChild(document.createElement('br'));
         }
+        
 
         function handleSubmit(event) {
             event.preventDefault(); // Prevents form from submitting traditionally
@@ -54,12 +80,45 @@
             // Display the item
             var displayArea = document.getElementById('itemsDisplay');
             displayArea.innerHTML += '<p> Produce: ' + produce + ' Quantity: ' + quantity + ' Expiry Date: ' + expiryDate + '</p>';
-
+            var itemID = new Date().getTime();
+            itemsDictionary[itemID] = {
+                produce: produce,
+                quantity: quantity,
+                expiryDate: expiryDate
+            };
+            displayItems();
             // Clear the form for new input
             event.target.reset();
+        }
+        function displayItems() {
+            var displayArea = document.getElementById('itemsDisplay');
+            displayArea.innerHTML = ''; // Clear previous items
+            for (var id in itemsDictionary) {
+                var item = itemsDictionary[id];
+                var daysLeft = daysUntilExpiry(item.expiryDate);
+                var bgColor = ''; // Default background color
+
+                if (daysLeft <= 2) {
+                    bgColor = '#ee6b6e'; // 2 days or less
+                } else if (daysLeft <= 5) {
+                    bgColor = '#FFFF93'; // 5 days or less
+                } else {
+                    bgColor = '#FFFAFAFA'; // Default color for more than 5 days
+                }
+
+                displayArea.innerHTML += '<p style="background-color:' + bgColor + '; padding: 10px; border-radius: 4px;">'+'Produce: ' + item.produce + ' Quantity: ' + item.quantity + ' Expiry Date: ' + item.expiryDate + ' (' + daysLeft + ' days left)</p>';
+            }
+        }
+        function daysUntilExpiry(expiryDate) {
+            var today = new Date();
+            var expiry = new Date(expiryDate);
+            var timeDiff = expiry.getTime() - today.getTime();
+            var daysDiff = timeDiff / (1000 * 3600 * 24);
+            return Math.ceil(daysDiff); // Returns the number of days left
         }
     </script>
 
 
 </body>
+
 </html>
