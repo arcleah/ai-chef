@@ -6,7 +6,9 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylelogin.css') }}">
     <title>Login Page</title>
     <style>
-
+        .message {
+            color: red;
+        }
     </style>
 </head>
     <a href="/">
@@ -19,7 +21,15 @@
 <body>
     <div class="login-container">
         <h1>Login</h1>
-        <form action="/pantry" method="post">
+        <!-- error message -->
+        {% with messages = get_flashed_messages() %}
+            {%if messages %}
+                {% for message in messages %}
+                    <spam class='message'>{{message}}</spam>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/login" method="post">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
@@ -33,5 +43,9 @@
             </div>
         </form>
     </div>
+
+
 </body>
 </html>
+
+
