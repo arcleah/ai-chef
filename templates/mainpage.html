@@ -5,18 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylemainpage.css') }}">
     <title>Chef AI</title>
+    <style>
+        body {
+            background-color: #eaf0e9bd; /* Main background color */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif; /* Example font */
+        }
+        header {
+            background-color: #97c294; /* Darker green header */
+            height: 50px;
+            padding: 1em 0; /* Padding for the header */
+            text-align: right; /* Align the navigation to the right */
+        }
+        header a {
+            color: white; /* Text color for the navigation */
+            text-decoration: none; /* No underline for the links */
+            margin-right: 2em; /* Right margin for the navigation links */
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            /* text-align: center;  Center the content 
+            padding-top: 5vh; Adjust the padding to center the content vertically */
+        }
+        #welcome-image {
+            width: 150px;
+            height: auto;
+            margin-bottom: 5px; /* Space between the welcome image and logo */
+        }
+        #mainpagelogo {
+            width: 250px;
+            height: auto;
+        }
+        .button-img {
+            width: 100px; /* Adjusted width for the buttons */
+            height: auto;
+            display: block;
+            margin-bottom: 5px; /* Center buttons with auto margins */
+            cursor: pointer; /* Change cursor to indicate clickable */
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="{{ url_for('aboutus') }}">About Us</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <img id ="mainpagelogo" src="{{ url_for('static', filename='images/chef_ai.png') }}" alt="Chef AI homepage Logo">
+        <img id="welcome-image" src="{{ url_for('static', filename='images/welcome.png') }}" alt="Welcome">
+        <img id="mainpagelogo" src="{{ url_for('static', filename='images/mainpagelogo.png') }}" alt="Chef AI homepage Logo">
+        <a href="{{ url_for('login') }}">
+            <img class="button-img" src="{{ url_for('static', filename='images/login.png') }}" alt="Login">
+        </a>
+        <a href="{{ url_for('signup') }}">
+            <img class="button-img" src="{{ url_for('static', filename='images/signup.png') }}" alt="Sign Up">
+        </a>
     </main>
 </body>
 </html>
